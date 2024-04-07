@@ -2,6 +2,7 @@
 Documentation       This test suite is to verify sorting tools functionality
 Library             SeleniumLibrary
 Library             Collections
+Resource    ../basePage.keywords.robot
 
 *** Variables ***
 ${TOOL_TITLE_SELECTOR}                          css=.card-title
@@ -9,7 +10,7 @@ ${SORT_DROPDOWN_BTN_SELECTOR}                   css:[data-test="sort"]
 ${DROPDOWN_LIST_OPTION_SELECTOR}                css=option
 ${PAGE_LINK_SELECTOR}                           css=.pagination .page-link
 ${TOOL_PRICE_SELECTOR}                          css=[data-test="product-price"]
-@{SORT_OPTION_VALUES}                           name,asc    name,desc    Price (High - Low)    Price (Low - High)
+@{SORT_OPTION_VALUES}                           name,asc    name,desc    price,desc    price,asc
 @{SORT_OPTION_NAMES}                            Name (A - Z)    Name (Z - A)    Price (High - Low)      Price (Low - High)
 @{tool_list}                                    Create List
 
@@ -41,3 +42,4 @@ Extract Name and Price Of Each Tool
         END
     END
     [Return]    ${tool_name_list}   ${tool_price_list}
+
