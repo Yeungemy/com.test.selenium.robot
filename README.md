@@ -45,3 +45,9 @@ Install plugins:
 
 ### check python path
 ![img_3.png](resources/img_3.png)
+
+## Setup allure report
+    1. npm install -g allure-commandline --save-dev
+    2.  pip install allure-robotframework 
+    3. Execute test: robot --listener allure_robotframework testCases/sortingToolsTestCases/sortingToolsTestSuite.robot
+    4. opent allure report: allure serve output/allure  

@@ -9,7 +9,7 @@ Resource            ./sortingToolsKeywords/sort.keywords.robot
 
 *** Keywords ***
 Launch Application
-    Open Browser    https://practicesoftwaretesting.com/#/    Chrome
+    Open Browser    https://practicesoftwaretesting.com/#/    Edge
     Maximize Browser Window
     Wait Until Element Is Visible    ${TOOL_TITLE_SELECTOR}
 
