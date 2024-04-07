@@ -8,14 +8,6 @@ Library    OperatingSystem
 
 
 *** Keywords ***
-Extract Options from Dropdown
-    [Arguments]     ${dropdown_btn_element}
-    ${dropdown}=    Get WebElement  ${dropdown_btn_element}
-    ${all_options}=    Get WebElements    css:option
-    @{option_names}     Create List
-    @{option_names}=    Get List of Names By WebElements    ${all_options}
-    [Return]    ${option_names}
-
 Select Option From Dropdown
     [Arguments]     ${dropdown_btn_element}     ${option_name}
     Select From List By Value    ${dropdown_btn_element}    ${option_name}

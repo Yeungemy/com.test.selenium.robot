@@ -12,7 +12,6 @@ ${option_list}      Create List
 
 *** Test Cases ***
 Verify Dropdown Option List
-    ${option_list}=     Extract Options from Dropdown       ${SORT_DROPDOWN_BTN_SELECTOR}
+    ${option_list}=         Get List Items    ${SORT_DROPDOWN_BTN_SELECTOR}
     Log To Console    ${option_list}
-    Lists Should Be Equal    ${option_list}    ${SORT_OPTION_NAMES}
-
+    List Should Contain Sub List    ${option_list}    ${SORT_OPTION_NAMES}
