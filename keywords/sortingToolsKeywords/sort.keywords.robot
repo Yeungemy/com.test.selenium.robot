@@ -21,7 +21,7 @@ Open Sort Dropdown List
 Sorting Tools
     [Arguments]     ${sort_option}
     Select From List By Value    ${SORT_DROPDOWN_BTN_SELECTOR}      ${sort_option}
-    Wait Until Element Is Visible    ${TOOL_TITLE_SELECTOR}
+    Sleep    5s
 
 Extract Name and Price Of Each Tool
     ${tool_name_list}    Create List
