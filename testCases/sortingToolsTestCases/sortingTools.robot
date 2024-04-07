@@ -22,15 +22,27 @@ Verify Dropdown Option List
 
 Verify Soring By Tool Name In ASC Order
     [Tags]      Sorting
-    ${tool_name_list}=      Extract Names Of All Tools
+
+    ${tool_name_list}   ${tool_price_list}=     Extract Name and Price Of Each Tool
+
     Log To Console    ${tool_name_list}
     Sort List    ${tool_name_list}
-    ${tool_name_list}=      Get Slice From List     ${tool_name_list}   0   9
+    ${expected_list}=      Get Slice From List     ${tool_name_list}   0   9
     Log To Console    ${tool_name_list}
     Sorting Tools    ${sort_option}
     Sleep   5s
     ${actual_list}=      Get List of Names By WebElement    ${TOOL_TITLE_SELECTOR}
     Log To Console    ${actual_list}
-    Lists Should Be Equal    ${tool_name_list}    ${actual_list}
+    Lists Should Be Equal    ${expected_list}    ${actual_list}
     
-
+Verify Soring By Tool Name In DESC Order
+    [Tags]      Sorting
+    ${expected_list}        Create List
+    Reverse List    ${tool_name_list}
+    ${expected_list}=      Get Slice From List     ${tool_name_list}   -8
+    Log To Console    ${tool_name_list}
+    Sorting Tools    ${SORT_OPTION_VALUES}[1]
+    Sleep   5s
+    ${actual_list}=      Get List of Names By WebElement    ${TOOL_TITLE_SELECTOR}
+    Log To Console    ${actual_list}
+    Lists Should Be Equal    ${tool_name_list}    ${actual_list}

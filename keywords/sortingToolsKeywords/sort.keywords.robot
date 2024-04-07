@@ -22,31 +22,22 @@ Sorting Tools
     Select From List By Value    ${SORT_DROPDOWN_BTN_SELECTOR}      ${sort_option}
     Wait Until Element Is Visible    ${TOOL_TITLE_SELECTOR}
 
-Extract Names Of All Tools
-    ${all_tools}    Create List
+Extract Name and Price Of Each Tool
+    ${tool_name_list}    Create List
+    ${tool_price_list}    Create List
     ${all_pages}=   Get WebElements    ${PAGE_LINK_SELECTOR}
     ${len}=   Get Length    ${all_pages}
     FOR    ${index}    IN RANGE     1   ${len}-1
         Click Element    ${all_pages}[${index}]
         Sleep    5s
-        ${webElements}=     Get WebElements    ${TOOL_TITLE_SELECTOR}
-            FOR    ${element}    IN    @{webElements}
-                ${option_text} =    Get Text    ${element}
-                Run Keyword If    '${option_text}' !=''    Append To List      ${all_tools}      ${option_text}
-            END
+        ${tool_name_selectors}=     Get WebElements    ${TOOL_TITLE_SELECTOR}
+        ${tool_price_selectors}=     Get WebElements    ${TOOL_PRICE_SELECTOR}
+        ${number_of_tools}=     Get Length    ${tool_name_selectors}
+        FOR    ${index}     IN RANGE    0   ${number_of_tools}
+            ${tool_name} =    Get Text    ${tool_name_selectors}[${index}]
+            ${tool_price} =    Get Text    ${tool_price_selectors}[${index}]
+            Run Keyword If    '${tool_name}' !=''    Append To List      ${tool_name_list}      ${tool_name}
+            Run Keyword If    '${tool_price}' !=''    Append To List      ${tool_price_list}      ${tool_price}
+        END
     END
-    [Return]    ${all_tools}
-
-Extract Prices Of All Tools
-    ${all_tools}    Create List
-    ${all_pages}=   Get WebElements    ${PAGE_LINK_SELECTOR}
-    ${len}=   Get Length    ${all_pages}
-    FOR    ${index}    IN RANGE     1   ${len}-1
-        Click Element    ${all_pages}[${index}]
-        ${webElements}=     Get WebElements    ${TOOL_PRICE_SELECTOR}
-            FOR    ${element}    IN    @{webElements}
-                ${option_text} =    Get Text    ${element}
-                Run Keyword If    '${option_text}' !=''    Append To List      ${all_tools}      ${option_text}
-            END
-    END
-    [Return]    ${all_tools}
+    [Return]    ${tool_name_list}   ${tool_price_list}
