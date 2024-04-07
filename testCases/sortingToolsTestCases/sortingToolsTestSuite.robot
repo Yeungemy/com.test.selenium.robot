@@ -30,7 +30,6 @@ Verify Sorting By Tool Name In ASC Order
     ${expected_list}=      Get Slice From List     ${tool_name_list}   0   9
     Log To Console    ${expected_list}
     Sorting Tools    ${sort_option}
-    Sleep   5s
     ${actual_list}=      Get List of Names By WebElement    ${TOOL_TITLE_SELECTOR}
     Log To Console    ${actual_list}
     Lists Should Be Equal    ${expected_list}    ${actual_list}
@@ -40,7 +39,6 @@ Verify Sorting By Tool Name In DESC Order
     Reverse List    ${tool_name_list}
     ${expected_list}=      Get Slice From List     ${tool_name_list}   0   9
     Sorting Tools     ${SORT_OPTION_VALUES}[1]
-    Sleep   5s
     ${actual_list}=      Get List of Names By WebElement    ${TOOL_TITLE_SELECTOR}
     Log To Console    ${expected_list}
     Log To Console    ${actual_list}
@@ -53,7 +51,6 @@ Verify Sorting By Tool Price In ASC Order
     Sort List    ${number_list}
     ${expected_list}=      Get Slice From List     ${number_list}   0   9
     Sorting Tools     ${SORT_OPTION_VALUES}[3]
-    Sleep   5s
     ${dollar_value_list}=      Get List of Names By WebElement    ${TOOL_PRICE_SELECTOR}
     ${actual_list}=     Convert To Numbers    ${dollar_value_list}
     Log To Console    ${expected_list}
@@ -65,7 +62,6 @@ Verify Sorting By Tool Price In DESC Order
     Reverse List    ${number_list}
     ${expected_list}=      Get Slice From List     ${number_list}   0   9
     Sorting Tools     ${SORT_OPTION_VALUES}[2]
-    Sleep   5s
     ${dollar_value_list}=      Get List of Names By WebElement    ${TOOL_PRICE_SELECTOR}
     ${actual_list}=     Convert To Numbers    ${dollar_value_list}
     Log To Console    ${expected_list}
