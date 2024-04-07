@@ -4,32 +4,49 @@ Library             SeleniumLibrary
 Library             Collections
 
 *** Variables ***
-${TOOL_TITLE_SELECTOR}               css=.card-title
-${SORT_DROPDOWN_BTN_SELECTOR}      css:[data-test="sort"]
-${DROPDOWN_LIST_OPTION_SELECTOR}                 css=option
-@{SORT_OPTION_VALUES}       name,asc    name,desc    Price (High - Low)    Price (Low - High)
-@{SORT_OPTION_NAMES}        Name (A - Z)    Name (Z - A)    Price (High - Low)      Price (Low - High)
-@{tool_list}                Create List
+${TOOL_TITLE_SELECTOR}                          css=.card-title
+${SORT_DROPDOWN_BTN_SELECTOR}                   css:[data-test="sort"]
+${DROPDOWN_LIST_OPTION_SELECTOR}                css=option
+${PAGE_LINK_SELECTOR}                           css=.pagination .page-link
+${TOOL_PRICE_SELECTOR}                          css=[data-test="product-price"]
+@{SORT_OPTION_VALUES}                           name,asc    name,desc    Price (High - Low)    Price (Low - High)
+@{SORT_OPTION_NAMES}                            Name (A - Z)    Name (Z - A)    Price (High - Low)      Price (Low - High)
+@{tool_list}                                    Create List
 
 *** Keywords ***
-Click Sort Dropdown Field
+Open Sort Dropdown List
    Click Element    ${SORT_DROPDOWN_BTN_SELECTOR}
 
-Select Sort Option from Dropdwon List
-   [Arguments]      ${orderOption}
-   Click Element    css:option[value="${orderOption}"]
+Sorting Tools
+    [Arguments]     ${sort_option}
+    Select From List By Value    ${SORT_DROPDOWN_BTN_SELECTOR}      ${sort_option}
+    Wait Until Element Is Visible    ${TOOL_TITLE_SELECTOR}
 
-Extract List of Tool Names
-   ${name_elements}=    Get WebElements    ${TOOL_TITLE_SELECTOR}
-   ${tool_list}=   Create List
+Extract Names Of All Tools
+    ${all_tools}    Create List
+    ${all_pages}=   Get WebElements    ${PAGE_LINK_SELECTOR}
+    ${len}=   Get Length    ${all_pages}
+    FOR    ${index}    IN RANGE     1   ${len}-1
+        Click Element    ${all_pages}[${index}]
+        Sleep    5s
+        ${webElements}=     Get WebElements    ${TOOL_TITLE_SELECTOR}
+            FOR    ${element}    IN    @{webElements}
+                ${option_text} =    Get Text    ${element}
+                Run Keyword If    '${option_text}' !=''    Append To List      ${all_tools}      ${option_text}
+            END
+    END
+    [Return]    ${all_tools}
 
-   FOR    ${element}    IN    @{name_elements}
-       Append To List    ${tool_list}    ${element.text}
-   END
-
-   [Return]    ${tool_list}
-
-Sort List in A-Z Order
-    [Arguments]     ${tool_list}
-    ${sorted_list}=     Sort List    ${tool_list}
-    [Return]    ${sorted_list}
+Extract Prices Of All Tools
+    ${all_tools}    Create List
+    ${all_pages}=   Get WebElements    ${PAGE_LINK_SELECTOR}
+    ${len}=   Get Length    ${all_pages}
+    FOR    ${index}    IN RANGE     1   ${len}-1
+        Click Element    ${all_pages}[${index}]
+        ${webElements}=     Get WebElements    ${TOOL_PRICE_SELECTOR}
+            FOR    ${element}    IN    @{webElements}
+                ${option_text} =    Get Text    ${element}
+                Run Keyword If    '${option_text}' !=''    Append To List      ${all_tools}      ${option_text}
+            END
+    END
+    [Return]    ${all_tools}
