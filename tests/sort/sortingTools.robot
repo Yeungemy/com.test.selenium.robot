@@ -1,11 +1,12 @@
 *** Settings ***
 Documentation           verify the functionalit of sorting tools
 Library                 SeleniumLibrary
-Resource                ../../keywords/basePage.keywords.robot
-Resource                ../../keywords/utils/toolbox.robot
+Resource                ../../resources/PO/sort/sort.keywords.robot
+Resource                ../../resources/basePage.keywords.robot
+Resource                ../../resources/PO/utils/toolbox.robot
 
-Suite Setup         Launch Application
-Suite Teardown      Teardown
+Suite Setup             Launch Application
+Suite Teardown          Teardown
 
 *** Variables ***
 ${option_list}              Create List

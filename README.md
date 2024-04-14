@@ -24,10 +24,10 @@ Run the the following commands to install Robot and Selenium Framework
 python3 -m pip install --upgrade pip
 pip3 install --upgrade robotframework
 pip3 install robotframework-lsp
+pip3 install --upgrade robotframework-seleniumlibrary
+pip3 install --upgrade robotframework-requests
 pip3 install --upgrade robotframework-databaselibrary
 pip3 install --upgrade robotframework-pdf2textlibrary
-pip3 install --upgrade robotframework-requests
-pip3 install --upgrade robotframework-seleniumlibrary
 pip3 install --upgrade robotframework-browser
 pip3 install --upgrade pyodbc
 rfbrowser init
@@ -44,7 +44,7 @@ Install plugins:
     chrome driver: https://chromedriver.chromium.org/downloads 
 
 ### check python path
-![img_3.png](resources/img_3.png)
+![img_3.png](resources/assets/img_3.png)
 
 ## Setup allure report
     1. npm install -g allure-commandline --save-dev
