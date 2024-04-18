@@ -46,6 +46,8 @@ Install plugins:
 ### check python path
 ![img_3.png](resources/assets/img_3.png)
 
+### Extract xpath: right click the element -> copy -> copy xpath
+
 ## Setup allure report
     1. npm install -g allure-commandline --save-dev
     2.  pip install allure-robotframework 

@@ -15,11 +15,10 @@ Launch Application
     Open Browser    https://practicesoftwaretesting.com/#/    chrome
 
     # Resize window position
-    Set Window Position         x=341   y=169
-    Set Window Size             width=1935  height=1090
     Maximize Browser Window
     Sleep                       3s
     Wait Until Element Is Visible    ${TOOL_TITLE_SELECTOR}
 
 Teardown
-    Close Browser
+    Close All Browsers
+
